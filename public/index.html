@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja-jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="/public/css.css">
+    <link rel="manifest" href="/manifest.json">
+    <title>PWA Test</title>
+  </head>
+  <body>
+    PWA Test
+  </body>
+  <script type="module">
+    const publicVapidKey = "BD1ObFM0zgGLIngkiDRaFuk5y6fSbVXckzDdq-CVXjaoIqh1x5sBl73wFyAPwv1FLjhoM8Ixn5SL24cPGAB8gUw";
+
+    function urlBase64ToUint8Array(base64String) {
+        const padding = '='.repeat((4 - base64String.length % 4) % 4);
+        const base64 = (base64String + padding)
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+    
+        const rawData = window.atob(base64);
+        const outputArray = new Uint8Array(rawData.length);
+    
+        for (let i = 0; i < rawData.length; ++i) {
+            outputArray[i] = rawData.charCodeAt(i);
+        }
+        return outputArray;
+    }
+
+    (async function(){
+    if ('serviceWorker' in navigator) {
+        const register = await navigator.serviceWorker.register('public/service-worker.js')
+        const subscription = await register.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(publicVapidKey),
+        });
+
+        await fetch("/subscribe", {
+            method: "POST",
+            body: JSON.stringify(subscription),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    }
+    })();        
+  </script>
+</html>

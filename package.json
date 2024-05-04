@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@deno/kv": "^0.7.0",
+    "@hono/node-server": "^1.11.1",
+    "hono": "^4.3.1",
+    "web-push": "^3.6.7"
+  }
+}

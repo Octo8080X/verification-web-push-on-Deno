@@ -1,0 +1,21 @@
+{
+  "name": "PWAテストアプリ",
+  "short_name": "PWAテスト",
+  "description": "PWAテストアプリ",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#FF0000",
+  "background_color": "#FF0000",
+  "icons": [
+    {
+      "src": "/public/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/public/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
